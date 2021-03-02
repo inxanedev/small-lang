@@ -1,5 +1,8 @@
 #include <iostream>
+#include "utils.hpp"
 
 int main() {
-    std::cout << "hello world!" << std::endl;
+    auto contents = read_file("file.txt");
+    for (const std::string& line : contents)
+        std::cout << line << std::endl;
 }
