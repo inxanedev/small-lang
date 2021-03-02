@@ -14,6 +14,10 @@ class Program {
         Program(const char* filename) {
             std::vector<std::string> raw_code = read_file(filename);
             for (int i = 0; i < raw_code.size(); i++) {
+                if (raw_code[i].size() == 0) {
+                    code.push_back(std::move(std::vector<std::string>()));
+                    continue;
+                }
                 std::vector<std::string> split_line = split_string(raw_code[i]);
                 if (split_line.at(0) == "LABEL")
                     m_labels.create_label(split_line.at(1), i + 1);
@@ -26,7 +30,10 @@ class Program {
             int ip = 0;
             while (ip != code.size()) {
                 std::vector<std::string> instruction = code.at(ip);
-                if (instruction.size() == 0) continue;
+                if (instruction.size() == 0) {
+                    ip += 1;
+                    continue;
+                }
                 if (instruction.at(0) == "print_text") {
                     expect_least_args(instruction, 1);
                     std::cout << build_line(instruction, 1);
