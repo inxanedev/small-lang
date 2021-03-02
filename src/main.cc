@@ -2,7 +2,7 @@
 #include "utils.hpp"
 
 int main() {
-    auto contents = read_file("file.txt");
-    for (const std::string& line : contents)
-        std::cout << line << std::endl;
+    auto result = split_string("");
+    for (const std::string& word : result)
+        std::cout << word << std::endl;
 }
